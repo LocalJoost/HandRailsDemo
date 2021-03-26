@@ -611,11 +611,11 @@ MonoBehaviour:
   trackRightHand: 1
   maxDistanceFromLine: 0.1
   maxDistanceFromWayPoint: 0.02
-  trackPinch: 1
+  trackPinch: 0
   trackGrab: 1
   drawGizmoLines: 0
   gizmoLineColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  drawRuntimeDebugObjects: 0
+  drawRuntimeDebugObjects: 1
   runtimeDebugObject: {fileID: 1780146854918680740, guid: 1fd62ee2245a505459f348afbc274e8a,
     type: 3}
   wayPointLineMaterial: {fileID: 2100000, guid: cdaa4a7c1a2f7b042b27b2bd122ab9ee,
