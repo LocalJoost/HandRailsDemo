@@ -39,6 +39,19 @@ namespace MRTKExtensions.Gesture
 
         [SerializeField]
         private Color gizmoLineColor = Color.yellow;
+        
+        [SerializeField]
+        private bool drawRuntimeDebugObjects = false;
+
+        [Header("Runtime debug Settings")]
+        [SerializeField]
+        private GameObject runtimeDebugObject;
+
+        [SerializeField]
+        private Material wayPointLineMaterial;
+
+        [SerializeField]
+        private float wayPointLineWidth = 0.01f;
 
         protected int CurrentIndex { get; private set; } = 0;
 
@@ -58,6 +71,7 @@ namespace MRTKExtensions.Gesture
             CurrentIndex = 0;
             WayPointLocations = wayPoints.Select(p => p.transform.position).ToList();
             TotalLength = WayPointLocations.TotalLength();
+            DrawRuntimeDebugObjects();
         }
 
         void Update()
@@ -119,6 +133,32 @@ namespace MRTKExtensions.Gesture
             {
                 Gizmos.DrawLine(wayPoints[i].transform.position, wayPoints[i + 1].transform.position);
                 i++;
+            }
+        }
+        
+        
+        private void DrawRuntimeDebugObjects()
+        {
+            if (drawRuntimeDebugObjects && runtimeDebugObject != null)
+            {
+                var lineTemplate = new GameObject("DebugLine");
+                lineTemplate.transform.parent = transform;
+                var lineRenderer = lineTemplate.AddComponent<LineRenderer>();
+                lineRenderer.useWorldSpace = true;
+                lineRenderer.startWidth = wayPointLineWidth;
+                lineRenderer.endWidth = lineRenderer.startWidth;
+                lineRenderer.material = wayPointLineMaterial;
+
+                for (var i = 0; i < WayPointLocations.Count; i++)
+                {
+                    Instantiate(runtimeDebugObject, WayPointLocations[i], Quaternion.identity, transform);
+                    if (i > 0)
+                    {
+                        var lineObject = Instantiate(lineTemplate);
+                        lineObject.GetComponent<LineRenderer>().SetPositions(new[] { WayPointLocations[i - 1], WayPointLocations[i] });
+                    }
+                }
+                Destroy(lineTemplate);
             }
         }
 
