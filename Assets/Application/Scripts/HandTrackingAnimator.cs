@@ -23,7 +23,7 @@ namespace App.Scripts
             var traveledLength = PointOnLine.DistanceTraveledAlongPath(WayPointLocations, CurrentIndex);
             var traveledFraction = traveledLength / TotalLength;
 
-            if (!animator.GetCurrentAnimatorStateInfo(0).IsName(animationName))
+            if (!animator.GetCurrentAnimatorStateInfo(animationLayer).IsName(animationName))
             {
                 animator.Play(animationName, animationLayer);
             }
