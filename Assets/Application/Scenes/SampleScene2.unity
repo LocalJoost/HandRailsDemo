@@ -609,8 +609,8 @@ MonoBehaviour:
   - {fileID: 1724660740}
   joint: 9
   trackRightHand: 1
-  maxDistanceFromLine: 0.1
-  maxDistanceFromWayPoint: 0.02
+  maxDistanceFromLine: 0.2
+  maxDistanceFromWayPoint: 0.04
   trackPinch: 0
   trackGrab: 1
   drawGizmoLines: 0
